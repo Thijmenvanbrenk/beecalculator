@@ -1,10 +1,5 @@
 bee_kastkaart_update <- function(file, date, location, size = NA, brood= NA, swarmcells = NA, pollen = NA, honey = NA, extra1 = NA, extra2 = NA) {
 
-  # loading in required packages
-  library(plyr)
-  library(here)
-  library(tidyverse)
-
   # loading in the file that needs updating
   hive <- utils::read.csv(file = here::here(file), row.names = 1)
 
