@@ -1,12 +1,15 @@
 Package: beecalculator
-Title: What the Package Does (One Line, Title Case)
+Title: This package automates some common bee calculating problems
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: person("Thijmen", "van Brenk", email = "tvanbrenk@outlook.com", role = c("aut", "cre"))
+Description: In this package are a few functions that does the calculating for you,
+    if you need to know how much honey is required before winter this package will calculate it for you.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Imports: 
+    here,
+    plyr
+Depends: 
+    R (>= 2.10)

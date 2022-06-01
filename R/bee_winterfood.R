@@ -1,12 +1,23 @@
+#' Calculate the amount of Honey and pollen that need to be fed before winter
+#'
+#' @param honey Number of frames
+#' @param pollen Number of frames
+#' @param bees Number of frames
+#'
+#' @return A calculated amount of honey and pollen
+#' @export
+#'
+#' @examples
+#' bee_winterfood(7, 2.5, 19)
 bee_winterfood <- function(honey, pollen, bees) {
-  
+
 # calculating the size of the colony
   if (bees >= 15) {
     bee_size <- "large"
   } else if (bees >= 11) {
     bee_size <- "medium"
  } else { bee_size <- "small"}
-  
+
 # calculating the amount of honey and the amount of honey still required
   honey_amount <- honey * 1.5
   if (bee_size == "large") {
@@ -14,7 +25,7 @@ bee_winterfood <- function(honey, pollen, bees) {
   } else {
     honey_required <- 15 - honey_amount
   }
-  
+
 # calculating if pollen amount is sufficient
   if (pollen >= 2) {
     pollen_required <- "this colony has enough pollen for winter"
