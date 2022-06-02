@@ -13,3 +13,8 @@ Imports:
     plyr
 Depends: 
     R (>= 2.10)
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

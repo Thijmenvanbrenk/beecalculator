@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' bee_kastkaart("14/05/2021", 6, "Hennie", "No", "F1 Dikkie", "Yes")
-#' bee_kastkaart("2022-02-16", 8, "Tantie", "Yes")
+#' bee_kastkaart("2022-02-16", 8, "Tantie", "Yes", export = TRUE)
 bee_kastkaart <- function(date, size, name, swarm, origin = NA, mated = NA, export = FALSE) {
 
   # make the new dataframe
@@ -29,7 +29,7 @@ bee_kastkaart <- function(date, size, name, swarm, origin = NA, mated = NA, expo
   # export as csv
   if (export == TRUE) {
 
-    utils::write.csv(new_hive, here::here(paste0("bees/", name, "_hive.csv")))
+    utils::write.csv(new_hive, here::here(paste0(name, "_hive.csv")))
   } else {
     print(new_hive)
   }

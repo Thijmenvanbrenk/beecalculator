@@ -2,10 +2,10 @@
 % Please edit documentation in R/bee_kastkaart_update.R
 \name{bee_kastkaart_update}
 \alias{bee_kastkaart_update}
-\title{Updating kastkaart after check up}
+\title{Updating kastkaart created with bee_kastkaart() after check up}
 \usage{
 bee_kastkaart_update(
-  files,
+  file,
   date,
   location,
   size = NA,
@@ -18,7 +18,7 @@ bee_kastkaart_update(
 )
 }
 \arguments{
-\item{files}{File location from project location}
+\item{file}{File location from project location}
 
 \item{date}{Date of checkup}
 
@@ -28,7 +28,7 @@ bee_kastkaart_update(
 
 \item{brood}{Amount of brood in frames}
 
-\item{swarmcells}{Yes or no}
+\item{swarmcells}{Amount of swarmcells}
 
 \item{pollen}{Amount of pollen in frames}
 
@@ -42,10 +42,10 @@ bee_kastkaart_update(
 updated version of the kastkaart
 }
 \description{
-Updating kastkaart after check up
+Updating kastkaart created with bee_kastkaart() after check up
 }
 \examples{
-x <- bee_kastkaart("2022-02-16", 8, "Tantie", "Yes")
-bee_kastkaart_update(x, "06/25/2021", "Kesteren", 12, honey = 3,
- extra1 = "Performed checkup to see honey stores")
+bee_kastkaart("2022-02-16", 8, "Tantie", "Yes", export = TRUE)
+
+bee_kastkaart_update("Tantie_hive.csv", "06/25/2021", "Kesteren", 12, 12, extra1 = "checkup honey")
 }

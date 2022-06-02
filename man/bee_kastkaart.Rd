@@ -29,5 +29,5 @@ Creating a kastkaart after making split or catching swarm
 }
 \examples{
 bee_kastkaart("14/05/2021", 6, "Hennie", "No", "F1 Dikkie", "Yes")
-bee_kastkaart("2022-02-16", 8, "Tantie", "Yes")
+bee_kastkaart("2022-02-16", 8, "Tantie", "Yes", export = TRUE)
 }
