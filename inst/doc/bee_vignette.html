@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Thijmen van Brenk" />
+
+
+<title>bee_vignette</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">bee_vignette</h1>
+<h4 class="author">Thijmen van Brenk</h4>
+
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>In the beekeeping industry it is important to document the things you
+do inside of the hive, if you only have a few hive using a piece of
+paper could be enough. But whenever you have more than 4 hives you have
+to either leave the paper on the hive or you will lose track of which
+paper is from which hive. In this R package you can easily create a new
+hive card and update that same hive card every time you look into the
+hive.<br />
+Calculating how much food is required before winter and how many days it
+takes before the queen goes on her mating flight can be done by hand but
+takes a while and is prone to mistakes. In this R package there are 2
+functions that will calculate for you when the queen goes on her mating
+flight and how much you need to feed your hives before winter (using
+amounts that are normal for winters in the netherlands).</p>
+</div>
+<div id="installation" class="section level1">
+<h1>installation</h1>
+<p>At this point you can only download <code>beecalculator</code> from
+Github:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;Thijmenvanbrenk/beecalculator&quot;</span>)</span></code></pre></div>
+</div>
+<div id="functions" class="section level1">
+<h1>functions</h1>
+<div id="winter-food-calculator" class="section level2">
+<h2>Winter food calculator</h2>
+<p>The required inputs to calculate how much food is necessary before
+winter are <code>honey</code>, <code>pollen</code> and
+<code>bees</code>.<br />
+The honey input calculates how much more honey is needed.<br />
+The pollen input calculates how much more pollen frames are
+needed.<br />
+The amount of bees in the hive can influence the necessary amount of
+honey required before winter.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the beecalculator library</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(beecalculator)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the input amount is in full frames. so 2 frames that are half full of bees will become 1 full frame of bees for this function.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bee_winterfood</span>(<span class="at">honey =</span> <span class="fl">3.5</span>, <span class="at">pollen =</span> <span class="dv">2</span>, <span class="at">bees =</span> <span class="dv">16</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;This colony is a large colony and requires&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;14.75 more kilos of dry sugar&quot;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;this colony has enough pollen for winter&quot;</span></span></code></pre></div>
+</div>
+<div id="mating-flight-calculator" class="section level2">
+<h2>mating flight calculator</h2>
+<p>The only required input is the date from when the old queen has been
+removed from the hive to start procedure.<br />
+There is however the possiblity that there were already swarm cells
+present before removing the queen, this has some implications on the
+dates which is why there are 2 extra options for this.<br />
+<code>larvae_size</code> is a prediction of how big the larvae is. it
+has 3 options:<br />
+1 = the swarm cells only contain eggs.<br />
+2 = the swarm cells only contain small larvae (1-3 days old).<br />
+3 = the swarm cells only contain big larvae (4-6 days old).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data has to be in format &quot;dd/mm/yyyy&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># larvae_size has to be a number between 1 and 3. read explaination above.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># one example without swarm cells</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">bee_mating_flight</span>(<span class="at">date =</span> <span class="st">&quot;27/04/2022&quot;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;The queens will be ripe on 11/05/20&quot;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;The queen will go on her mating flight between 16/05/20 and 25/05/20 DO NOT move the hive during this time&quot;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;You need to check if the queen is ripe on 08/06/20&quot;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 examples with swarm cells</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">bee_mating_flight</span>(<span class="at">date =</span> <span class="st">&quot;27/04/2022&quot;</span>, <span class="at">swarmcells =</span> T, <span class="at">larvae_size =</span> <span class="dv">1</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;The queens will be ripe on 10/05/20 plus 1-2 days&quot;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;The queen will go on her mating flight between 15/05/20 and 24/05/20 DO NOT move the hive during this time&quot;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;You need to check if the queen is ripe on 07/06/20&quot;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">bee_mating_flight</span>(<span class="at">date =</span> <span class="st">&quot;27/04/2022&quot;</span>, <span class="at">swarmcells =</span> T, <span class="at">larvae_size =</span> <span class="dv">3</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;The queens will be ripe on 04/05/20 plus 1-2 days&quot;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;The queen will go on her mating flight between 09/05/20 and 18/05/20 DO NOT move the hive during this time&quot;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;You need to check if the queen is ripe on 01/06/20&quot;</span></span></code></pre></div>
+</div>
+<div id="setting-up-hive-card" class="section level2">
+<h2>setting up hive card</h2>
+<p>A hive card gets created when you either make a split or when you
+catch a swarm hence why there are not that many option. required inputs
+are the <code>date</code>, <code>size</code>, <code>name</code> and
+<code>swarm</code>.<br />
+date can be in any format.<br />
+size needs to be in full frames.<br />
+name needs to be a character string that defines the name of this hive.
+swarm needs to be either “Yes” or “No”<br />
+if you need to know the origin of the hive and if the queen is mated or
+not this can also be added.<br />
+if you want to preview the hive card before using it export can stay
+false, if you want to export it into a csv file to build upon later
+switch it to export = TRUE.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bee_kastkaart</span>(<span class="at">date =</span> <span class="st">&quot;27/04/2022&quot;</span>, <span class="at">size =</span>  <span class="dv">6</span>, <span class="at">name =</span> <span class="st">&quot;Truus&quot;</span>, <span class="at">swarm =</span> <span class="st">&quot;No&quot;</span>, <span class="at">origin =</span> <span class="st">&quot;F1 Bram&quot;</span>, <span class="at">mated =</span> <span class="st">&quot;Yes&quot;</span>, <span class="at">export =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bee_kastkaart</span>(<span class="at">date =</span> <span class="st">&quot;27/04/2022&quot;</span>, <span class="at">size =</span>  <span class="dv">10</span>, <span class="at">name =</span> <span class="st">&quot;Felix&quot;</span>, <span class="at">swarm =</span> <span class="st">&quot;Yes&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                       date origin mated swarm size</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Day of creation 27/04/2022     NA    NA   Yes   10</span></span></code></pre></div>
+<p>To update the hive card the only required fields are
+<code>file</code>, <code>date</code> and <code>location</code>.<br />
+file is required to find the csv file to build further upon.<br />
+date to show which day you added a check up.<br />
+location to know where the hive was at the moment of check up.<br />
+all the other data is optional and only has to be filled in if
+thoroughly checked.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bee_kastkaart_update</span>(<span class="at">file =</span> <span class="st">&quot;Truus_hive.csv&quot;</span>, <span class="at">date =</span> <span class="st">&quot;01/05/2022&quot;</span>, <span class="at">location =</span> <span class="st">&quot;Eldik&quot;</span>, <span class="at">extra1 =</span> <span class="st">&quot;Checked if queen surived split&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bee_kastkaart_update</span>(<span class="at">file =</span> <span class="st">&quot;Truus_hive.csv&quot;</span>, <span class="at">date =</span> <span class="st">&quot;07/07/2022&quot;</span>, <span class="at">location =</span> <span class="st">&quot;Lienden&quot;</span>, <span class="at">size =</span> <span class="dv">17</span>, <span class="at">brood =</span> <span class="dv">11</span>, <span class="at">swarmcells =</span> <span class="dv">2</span>, <span class="at">honey =</span> <span class="dv">12</span>, <span class="at">extra1 =</span> <span class="st">&quot;Harvested honey&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">read.csv</span>(<span class="st">&quot;Truus_hive.csv&quot;</span>))</span></code></pre></div>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="7%" />
+<col width="5%" />
+<col width="4%" />
+<col width="4%" />
+<col width="3%" />
+<col width="6%" />
+<col width="10%" />
+<col width="11%" />
+<col width="10%" />
+<col width="14%" />
+<col width="10%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">X</th>
+<th align="left">date</th>
+<th align="left">origin</th>
+<th align="left">mated</th>
+<th align="left">swarm</th>
+<th align="right">size</th>
+<th align="left">location</th>
+<th align="right">Frames.of.brood</th>
+<th align="left">Frames.of.pollen</th>
+<th align="right">Frames.of.honey</th>
+<th align="right">Swarm.cells.present.</th>
+<th align="left">Side.note.1</th>
+<th align="left">Side.note.2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">27/04/2022</td>
+<td align="left">F1 Bram</td>
+<td align="left">Yes</td>
+<td align="left">No</td>
+<td align="right">6</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">07/07/2022</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">17</td>
+<td align="left">Lienden</td>
+<td align="right">11</td>
+<td align="left">NA</td>
+<td align="right">12</td>
+<td align="right">2</td>
+<td align="left">Harvested honey</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="available-data" class="section level1">
+<h1>Available data</h1>
+<div id="kastkaart" class="section level2">
+<h2>Kastkaart</h2>
+<p>This package contains 1 dataframe called kastkaart. this datafile
+shows what a kastkaart looks like when it has been filled up with lots
+of check ups.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(beecalculator<span class="sc">::</span>kastkaart)</span></code></pre></div>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="4%" />
+<col width="2%" />
+<col width="2%" />
+<col width="2%" />
+<col width="4%" />
+<col width="7%" />
+<col width="8%" />
+<col width="7%" />
+<col width="10%" />
+<col width="24%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">date</th>
+<th align="left">origin</th>
+<th align="left">mated</th>
+<th align="left">swarm</th>
+<th align="right">size</th>
+<th align="left">location</th>
+<th align="right">Frames.of.brood</th>
+<th align="right">Frames.of.pollen</th>
+<th align="right">Frames.of.honey</th>
+<th align="right">Swarm.cells.present.</th>
+<th align="left">Side.note.1</th>
+<th align="left">Side.note.2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">02/06/2021</td>
+<td align="left">F2 Basti</td>
+<td align="left">Yes</td>
+<td align="left">No</td>
+<td align="right">6</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">09/06/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">6</td>
+<td align="left">Dodewaard</td>
+<td align="right">2.0</td>
+<td align="right">0.50</td>
+<td align="right">0.25</td>
+<td align="right">NA</td>
+<td align="left">Low on honey</td>
+<td align="left">already build all frames</td>
+</tr>
+<tr class="odd">
+<td align="left">10/06/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">Dodewaard</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">put on 1 kilo of sugar for feeding</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">19/06/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">6</td>
+<td align="left">Dodewaard</td>
+<td align="right">5.0</td>
+<td align="right">0.50</td>
+<td align="right">0.75</td>
+<td align="right">NA</td>
+<td align="left">removed feeding box</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">21/06/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">7</td>
+<td align="left">Dodewaard</td>
+<td align="right">5.0</td>
+<td align="right">0.75</td>
+<td align="right">0.75</td>
+<td align="right">NA</td>
+<td align="left">moved from 6 size box to 11 size box</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">30/06/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">9</td>
+<td align="left">Dodewaard</td>
+<td align="right">5.5</td>
+<td align="right">1.00</td>
+<td align="right">1.25</td>
+<td align="right">NA</td>
+<td align="left">casual checkup</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">10/07/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">11</td>
+<td align="left">Dodewaard</td>
+<td align="right">8.0</td>
+<td align="right">1.00</td>
+<td align="right">2.50</td>
+<td align="right">NA</td>
+<td align="left">added honey box because of linden blossom</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">17/07/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">14</td>
+<td align="left">Dodewaard</td>
+<td align="right">9.0</td>
+<td align="right">1.50</td>
+<td align="right">10.00</td>
+<td align="right">3</td>
+<td align="left">added second brood box because of massive growth</td>
+<td align="left">split brood nest to prevent swarming</td>
+</tr>
+<tr class="odd">
+<td align="left">30/07/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">16</td>
+<td align="left">Dodewaard</td>
+<td align="right">9.0</td>
+<td align="right">2.00</td>
+<td align="right">12.00</td>
+<td align="right">NA</td>
+<td align="left">honey box almost fully sealed</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">02/08/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">Opheusden</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="left">moved back home after linden blossom</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">06/08/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="left">Opheusden</td>
+<td align="right">NA</td>
+<td align="right">2.00</td>
+<td align="right">3.00</td>
+<td align="right">NA</td>
+<td align="left">removed honey boxes</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">16/08/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">16</td>
+<td align="left">Opheusden</td>
+<td align="right">8.0</td>
+<td align="right">2.00</td>
+<td align="right">3.50</td>
+<td align="right">NA</td>
+<td align="left">bees are slowly preparing for winter</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">31/08/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">15</td>
+<td align="left">Opheusden</td>
+<td align="right">7.5</td>
+<td align="right">2.00</td>
+<td align="right">4.00</td>
+<td align="right">NA</td>
+<td align="left">start feeding before winter</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">22/09/2021</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="right">14</td>
+<td align="left">Opheusden</td>
+<td align="right">7.0</td>
+<td align="right">2.50</td>
+<td align="right">11.00</td>
+<td align="right">NA</td>
+<td align="left">last checkup before winter</td>
+<td align="left">WINTER READY</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
