@@ -32,14 +32,8 @@ bee_mating_flight("27/04/2022", swarmcells = T, larvae_size = 3)
 #> [1] "The queens will be ripe on 04/05/20 plus 1-2 days"
 #> [1] "The queen will go on her mating flight between 09/05/20 and 18/05/20 DO NOT move the hive during this time"
 #> [1] "You need to check if the queen is ripe on 01/06/20"
-#> [1] "The queens will be ripe on 04/05/20 plus 1-2 days"
-#> [1] "The queen will go on her mating flight between 09/05/20 and 18/05/20 DO NOT move the hive during this time"
-#> [1] "You need to check if the queen is ripe on 01/06/20"
 
 bee_mating_flight("27/04/2022", swarmcells = F)
-#> [1] "The queens will be ripe on 11/05/20"
-#> [1] "The queen will go on her mating flight between 16/05/20 and 25/05/20 DO NOT move the hive during this time"
-#> [1] "You need to check if the queen is ripe on 08/06/20"
 #> [1] "The queens will be ripe on 11/05/20"
 #> [1] "The queen will go on her mating flight between 16/05/20 and 25/05/20 DO NOT move the hive during this time"
 #> [1] "You need to check if the queen is ripe on 08/06/20"
@@ -55,14 +49,8 @@ bee_winterfood(5, 2.5, 11)
 #> [1] "This colony is a medium colony and requires"
 #> [1] "7.5 more kilos of dry sugar"
 #> [1] "this colony has enough pollen for winter"
-#> [1] "This colony is a medium colony and requires"
-#> [1] "7.5 more kilos of dry sugar"
-#> [1] "this colony has enough pollen for winter"
 
 bee_winterfood(5, 1.5, 16)
-#> [1] "This colony is a large colony and requires"
-#> [1] "12.5 more kilos of dry sugar"
-#> [1] "atleast 0.5 more frames of pollen"
 #> [1] "This colony is a large colony and requires"
 #> [1] "12.5 more kilos of dry sugar"
 #> [1] "atleast 0.5 more frames of pollen"
