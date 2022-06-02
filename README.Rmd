@@ -37,18 +37,18 @@ This package contains 2 calculating functions:
 ```{r bee mating flight}
 library(beecalculator)
 #> larvae_size is depended on how big the larvae in the swarm cell is: 1 = egg, 2 = small larvae, 3 = big larvae
-bee_mating_flight("27/04/2022", swarmcells = T, larvae_size = 3)
+bee_mating_flight(date = "27/04/2022", swarmcells = T, larvae_size = 3)
 
-bee_mating_flight("27/04/2022", swarmcells = F)
+bee_mating_flight(date = "27/04/2022", swarmcells = F)
 ```
 <br>        
 2. calculating how much food is needed before winter with *bee_winterfood()*
 
 ```{r bee winter food}
 #> all values are in amount of full frames
-bee_winterfood(5, 2.5, 11)
+bee_winterfood(honey = 5, pollen = 2.5, bees = 11)
 
-bee_winterfood(5, 1.5, 16)
+bee_winterfood(honey = 5, pollen = 1.5, bees = 16)
 ```
 
 
@@ -59,7 +59,7 @@ there are 2 functions present that create and update the kastkaart:
 
 ```{r bee kastkaart}
 
-bee_kastkaart("27/04/2022", 6, "Henkie", "No", mated = "Yes", export = TRUE)
+bee_kastkaart(date = "27/04/2022", size =  6, name =  "Henkie", swarm = "No", mated = "Yes", export = TRUE)
 knitr::kable(read.csv("Henkie_hive.csv"))
 
 ```
@@ -67,7 +67,7 @@ knitr::kable(read.csv("Henkie_hive.csv"))
 2. updating the kastkaart with *bee_kastkaart_update()*
 
 ```{r}
-bee_kastkaart_update("Henkie_hive.csv", "03/05/2022", "Ochten", honey = 2, extra1 = "Extra checkup to illustrate function")
+bee_kastkaart_update(file = "Henkie_hive.csv", date =  "03/05/2022", location =  "Ochten", honey = 2, extra1 = "Extra checkup to illustrate function")
 knitr::kable(read.csv("Henkie_hive.csv"))
 ```
 
